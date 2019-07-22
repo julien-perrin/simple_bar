@@ -1,0 +1,11 @@
+number:
+    path: /number
+    controller: App\Controller\DefaultController::number
+
+dynamic:
+    path: /dynamic/{max}
+    controller: App\Controller\DefaultController::dynamic
+
+dynamic2:
+    path: /dynamic2
+    controller: App\Controller\DefaultController::show_dynamic
