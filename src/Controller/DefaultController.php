@@ -25,7 +25,7 @@ class DefaultController
         );
     }
 
-    public function show_dynamic()
+    public function showDynamic()
     {
         return new Response(
             '<html><body>Dynamic2</body></html>'

@@ -8,4 +8,4 @@ dynamic:
 
 dynamic2:
     path: /dynamic2
-    controller: App\Controller\DefaultController::show_dynamic
+    controller: App\Controller\DefaultController::showDynamic
