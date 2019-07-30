@@ -1,13 +1,12 @@
 {% extends 'base.html.twig' %}
 {% block title %}Voici nos bières {{parent()}}{% endblock %}
-{% block stylesheets %}{% endblock %}
 {% block body %}
-<h1>Liste des bières</h1>
-<ul>
-    {% for beer in beers %}
-        <li>{{ beer }}</li>
-    {% endfor %}
-</ul>
+{% if belgiumBeers is defined %}
+    <ul>
+        {% for belgiumBeer in belgiumBeers %}
+            <li>{{ belgiumBeer }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
 {% endblock %}
-{% block javascripts %}{% endblock %}
 {% block footer %}&copy; Copyright 2019.{% endblock %}

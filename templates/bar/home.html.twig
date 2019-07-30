@@ -1,6 +1,25 @@
+{% extends 'base.html.twig' %}
 
-<title>{% block title %}Welcome!{% endblock %}</title>
-{% block stylesheets %}{% endblock %}
-{% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
+{% block title %} Welcome! {{ title }} {% endblock %}
+
+{% block body %}
+        <h1>Liste des bières</h1>
+        {% if beers is defined %}
+            <ul>
+                {% for beer in beers %}
+                    <li>{{ beer.name }} / {{ beer.country.id }} / {{ beer.publishedAt | date('d/m/Y')}}
+                    {# créez un lien vers le pays pour afficher les bières par pays #}
+                    </li>
+                    {% if beer.country %}
+                        Country origin : 
+                        <a href="{{ path('country_beer', { 'id' : beer.country.id }) }}">
+                            {{ beer.country.name }}
+                        </a>
+                        <br/><br/>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+            <a class="nav-link" href="{{ path('show_beer', {'id' : 1}) }}">Show belgium beers</a>
+        {% endif %}
+{% endblock %}
 
