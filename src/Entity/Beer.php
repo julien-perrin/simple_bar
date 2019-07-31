@@ -6,9 +6,13 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+// Pour la validation des champs du formulaire
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BeerRepository")
  */
+
 class Beer
 {
     /**
@@ -16,6 +20,7 @@ class Beer
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
+
     private $id;
 
     /**
@@ -25,6 +30,9 @@ class Beer
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @Assert\NotBlank(
+     *  message="Attention le titre doit être renseigné"
+     * )
      */
     private $name;
 
@@ -34,9 +42,9 @@ class Beer
     private $description;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="datetime", nullable=false)
      */
-    private $published_at;
+    private $publishedAt;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\Category", inversedBy="beers")
@@ -45,12 +53,20 @@ class Beer
 
     /**
      * @ORM\Column(type="decimal", precision=5, scale=2, nullable=true)
+     * @Assert\Range(
+     *      min = 0.5,
+     *      max = 99,
+     *      minMessage = "You must at least {{ limit }} enter a price of {{ limit }}.",
+     *      maxMessage = "You cannot enter a price more than {{ limit }}."
+     * )
      */
     private $price;
 
     public function __construct()
     {
         $this->categories = new ArrayCollection();
+
+        $this->publishedAt = new \DateTime('now');
     }
 
     public function getId(): ?int
@@ -96,12 +112,12 @@ class Beer
 
     public function getPublishedAt(): ?\DateTimeInterface
     {
-        return $this->published_at;
+        return $this->publishedAt;
     }
 
-    public function setPublishedAt(?\DateTimeInterface $published_at): self
+    public function setPublishedAt(?\DateTimeInterface $publishedAt): self
     {
-        $this->published_at = $published_at;
+        $this->publishedAt = $publishedAt;
 
         return $this;
     }

@@ -5,6 +5,7 @@ use Faker;
 use App\Entity\Beer;
 use App\Entity\Country;
 use App\Entity\Category;
+use App\Entity\Client;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -19,6 +20,7 @@ class AppFixtures extends Fixture
 
         $countries = ['belgium', 'french', 'English', 'germany'];
 
+        // Country
         for ($i = 0; $i < 10; $i++) {
             $country = new Country();
             $country->setName($countries[rand(0,3)]);
@@ -86,6 +88,18 @@ class AppFixtures extends Fixture
             }
 
             $manager->persist($beer);
+        }
+
+        // Client
+        for ($i = 0; $i < 10; $i++) {
+            $client = new Client();
+            $client->setEmail($faker->email);
+            $client->setWeigth($faker->randomNumber(2));
+            $client->setName($faker->word);
+            $client->setNumberBeer($faker->randomNumber(2));
+            
+
+            $manager->persist($client);
         }
 
         $manager->flush();

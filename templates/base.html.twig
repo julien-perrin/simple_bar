@@ -13,6 +13,7 @@
             'routeName' : app.request.attributes.get('_route'),
             'params' : app.request.attributes.get('_route_params')?? null
         }))}}
+        
         {% if app.request.attributes.get('_route') == 'home' %}
             {% include 'partials/logo.html.twig' %}
         {% endif %}

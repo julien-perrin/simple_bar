@@ -18,6 +18,9 @@
                     <a class="nav-link {% if  routeName == "category_beers" and category.id == id  %} active {% endif %}" href="{{ path('category_beers', {'id' : category.id}) }}">{{ category.title }}</a>
                 </li>
             {% endfor %}
+            <li class="nav-item">
+                <a class="nav-link {% if  routeName == "admin.create.beer" %} active {% endif %}" href="{{ path('admin.create.beer', {'id' : 1}) }}">Add a beer</a>
+            </li>
         </ul>
     </div>
 </nav>
